@@ -1,5 +1,13 @@
 # Release notes
 
+## data-v3 — loader compatibility
+
+- Treat API 1 and loader-v5 as minimum requirements; newer versions are accepted.
+- Retain rejection of missing, malformed or older loader metadata.
+- Add regression coverage for newer APIs and loader builds, including callback forwarding.
+
+Gameplay behavior is unchanged from data-v2 and still requires in-game validation.
+
 ## data-v2 — publication candidate
 
 - Rename the public project and mod-manager package to **Shallow Water Diving**.

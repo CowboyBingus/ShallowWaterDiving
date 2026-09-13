@@ -19,7 +19,7 @@ with zipfile.ZipFile(sys.argv[1]) as package:
     assert manager['IconPath']==manager['Options'][0]['Image']=='thumbnail.png'
     assert inspect_png(package.read('thumbnail.png'))['dimensions']==(1254,1254)
     provenance=json.loads(package.read('ShallowWaterDiving-manifest.json'))
-    assert provenance['revision']=='data-v2'
+    assert provenance['revision']=='data-v3'
     assert provenance['requires']==[{'name':'Bingus Shared Loader','api':1,'revision':'loader-v5'}]
     assert provenance['runtime_verified'] is False
     for name,digest in provenance['files'].items(): assert hashlib.sha256(package.read(name)).hexdigest().upper()==digest

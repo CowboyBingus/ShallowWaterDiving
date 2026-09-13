@@ -1,10 +1,10 @@
-Shallow Water Diving — data-v2 gameplay candidate
-Requires Bingus Shared Loader loader-v5 / API 1.
+Shallow Water Diving — data-v3 gameplay candidate
+Requires Bingus Shared Loader loader-v5 or newer / API 1 or newer.
 Supported Steam build 24826606 / EXE 1.8.45317.0.
 
-Upgrading from data-v1: replace the Shallow Water Diving package. The existing
-loader-v5 is sufficient. data-v2 waits through native initialization instead
-of stopping permanently on a missing game pointer.
+Upgrading from data-v1 or data-v2: replace the Shallow Water Diving package.
+An existing loader-v5 or newer is sufficient. data-v3 accepts newer loader
+APIs and retains startup recovery from data-v2.
 
 Close Helldivers 2. Import ShallowWaterDiving.zip and the updated
 BingusSharedLoader.zip into Arsenal or HD2MM. Replace the previous loader

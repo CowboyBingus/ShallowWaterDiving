@@ -4,11 +4,11 @@
 
 A candidate fix for dives that immediately cancel in shallow water. During the airborne dive, the local avatar uses the standing water reference. The normal prone reference returns when landing begins, the dive ends, or deeper water is reached. The intended result is a valid dive from shallow water onto dry land. Ordinary prone input retains the game's existing water restrictions.
 
-**data-v2 gameplay candidate. Requires Bingus Shared Loader loader-v5 / API 1.** Supported Steam build: 24826606; EXE 1.8.45317.0. Offline tests pass; in-game timing and behavior still require validation.
+**data-v3 gameplay candidate. Requires Bingus Shared Loader loader-v5 or newer / API 1 or newer.** Supported Steam build: 24826606; EXE 1.8.45317.0. Offline tests pass; in-game timing and behavior still require validation.
 
 [Bingus Shared Loader](https://github.com/CowboyBingus/BingusSharedLoader) is a separate dependency and is not included in this repository. Use a compatible loader build; an earlier loader will not activate this module.
 
-data-v2 fixes a startup failure in data-v1: the module now waits for native managers and avatar records to initialize instead of permanently stopping on a missing pointer. Replace the gameplay ZIP; an already installed loader-v5 can stay.
+data-v3 accepts newer shared-loader APIs and retains the data-v2 startup recovery: the module waits for native managers and avatar records to initialize instead of permanently stopping on a missing pointer. Replace the gameplay ZIP; an already installed loader-v5 or newer can stay.
 
 Import `ShallowWaterDiving.zip` and the updated `BingusSharedLoader.zip` into Arsenal or HD2MM. With the game closed, enable both and Purge / Deploy. Under Arsenal's default priority, put the loader last. Installation does not require Consistent Vaulting or other gameplay mods.
 
