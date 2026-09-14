@@ -6,6 +6,8 @@ A candidate fix for dives that immediately cancel in shallow water. During the a
 
 **data-v3 gameplay candidate. Requires Bingus Shared Loader loader-v5 or newer / API 1 or newer.** Supported Steam build: 24826606; EXE 1.8.45317.0. Offline tests pass; in-game timing and behavior still require validation.
 
+[Download data-v3](https://github.com/CowboyBingus/ShallowWaterDiving/releases/tag/data-v3) · [Download the required loader-v5](https://github.com/CowboyBingus/BingusSharedLoader/releases/tag/loader-v5).
+
 [Bingus Shared Loader](https://github.com/CowboyBingus/BingusSharedLoader) is a separate dependency and is not included in this repository. Use a compatible loader build; an earlier loader will not activate this module.
 
 data-v3 accepts newer shared-loader APIs and retains the data-v2 startup recovery: the module waits for native managers and avatar records to initialize instead of permanently stopping on a missing pointer. Replace the gameplay ZIP; an already installed loader-v5 or newer can stay.
