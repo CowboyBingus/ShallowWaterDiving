@@ -14,7 +14,7 @@ with zipfile.ZipFile(sys.argv[1]) as package:
     expected|={'manifest.json','ShallowWaterDiving-manifest.json','ShallowWaterDiving-README.txt','thumbnail.png'}
     assert set(names)==expected and len(names)==len(expected)
     manager=json.loads(package.read('manifest.json'))
-    assert manager['Name']=='Shallow Water Diving' and manager['Options'][0]['Include']==['data']
+    assert manager['Name']=='Shallow Water Diving - v3' and manager['Options'][0]['Include']==['data']
     assert manager['Guid']=='d93cfc97-0e42-47d6-936a-30e96a7fa539'
     assert manager['IconPath']==manager['Options'][0]['Image']=='thumbnail.png'
     assert inspect_png(package.read('thumbnail.png'))['dimensions']==(1254,1254)
