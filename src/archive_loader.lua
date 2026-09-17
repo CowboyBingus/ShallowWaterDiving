@@ -10,8 +10,8 @@ return function(create_api,patch,build)
         state.status=status;state.counts=counts
         print('[ShallowWaterDiving] '..build.revision..': '..status)
         pcall(function()
-            local directory=os.getenv('LOCALAPPDATA');if not directory then return end
-            local file=io.open(directory..'/ShallowWaterDiving.log','w');if not file then return end
+            local logger=rawget(_G,'CowboyBingusModLoader')
+            local file=logger and logger.open_log and logger.open_log('ShallowWaterDiving.log');if not file then return end
             file:write(build.revision..'\n'..status..'\n')
             for _,key in ipairs({'observed','protected','restored','startup_clears','short_ends'}) do
                 file:write(key..'='..state[key]..'\n')

@@ -80,6 +80,14 @@ local function reset()
 end
 local function apply()return patch.apply(api,game,0,state)end
 local function near(a,b)assert(math.abs(a-b)<1e-6,tostring(a)..' != '..tostring(b))end
+for mode=1,7 do
+    reset();u(mission,0x40,mode);assert(apply());assert(state.protected==1,'dive rejected mission mode '..mode)
+    assert(patch.restore(api,state.pending))
+end
+for _,mode in ipairs({0,8,0xffffffff})do
+    reset();u(mission,0x40,mode);assert(apply());assert(writes==0)
+end
+reset();u(mission,0x40,2);u(mission,8,0);assert(apply());assert(writes==0);u(mission,8,1)
 
 -- Actual stationary failure at 31.746s: first prone frame, 0.011s debt,
 -- followed by the game's predicate. This test uses the production reader/writer.

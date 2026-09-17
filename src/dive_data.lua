@@ -60,7 +60,7 @@ function M.snapshot(api,game)
         end
     end
     local mode=read(global(0x276c3d0),0x44)
-    if u(mode,8)==0 or u(mode,0x40)~=1 then return nil,'waiting_for_mission' end
+    if u(mode,8)==0 or u(mode,0x40)<1 or u(mode,0x40)>7 then return nil,'waiting_for_mission' end
     stage='local_player'
     local pm=global(0x276c190)
     local counts=read(pm+0x84,8)
