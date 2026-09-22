@@ -1,5 +1,6 @@
 local ffi,bit=require('ffi'),require('bit')
 local M={}
+local MAX_WATER_DEPTH=0.20 -- game units above the native root; tightened after the knee-depth test
 local function value(b,o,kind)
     local v=ffi.new(kind..'[1]');ffi.copy(v,b:sub(o+1),ffi.sizeof(v));return tonumber(v[0])
 end
@@ -59,10 +60,10 @@ function M.snapshot(api,game)
             if u(row,0)==empty then return nil end
         end
     end
-    local mode=read(global(0x276c3d0),0x44)
+    local mode=read(global(0x33266a0),0x44)
     if u(mode,8)==0 or u(mode,0x40)<1 or u(mode,0x40)>7 then return nil,'waiting_for_mission' end
     stage='local_player'
-    local pm=global(0x276c190)
+    local pm=global(0x3326468)
     local counts=read(pm+0x84,8)
     assert(u(counts,0)<=4 and u(counts,4)<=4,'Unsupported player count')
     if u(counts,0)==0 or u(counts,4)==0 then return nil,'waiting_for_local_player' end
@@ -71,16 +72,16 @@ function M.snapshot(api,game)
     local unit=u(read(pm+0x3a8,4),0)
     if unit==0x7fff then return nil,'waiting_for_local_avatar' end
     stage='local_avatar'
-    local owner=global(0x276f0c0,true)
-    local ei=lookup(read(owner+0xf21a88,20),unit,1048576)
+    local owner=global(0x346bf98,true)
+    local ei=lookup(read(owner+0xf22ec8,20),unit,1048576)
     if not ei or ei==0xffffffff then return nil,'waiting_for_local_avatar' end
     assert(ei<262144,'Unsupported entity index')
-    local entity_address=owner+0xf31ad8+ei*24
+    local entity_address=owner+0xf32f18+ei*24
     local entity=read(entity_address,24,true)
     assert(entity:sub(1,8)==RESOURCE,'Unsupported avatar resource')
     if bit.band(entity:byte(21),1)==0 then return nil,'waiting_for_local_avatar' end
     local id=u(entity,8)
-    local am=global(0x276ca30,true)
+    local am=global(0x3326d20,true)
     local ai=lookup(read(am+0xf8,20),id,64)
     if not ai or ai==0xffffffff then return nil,'waiting_for_local_avatar' end
     local count=u(read(am+0x6c,4),0)
@@ -91,12 +92,12 @@ function M.snapshot(api,game)
     local dive=read(ctl+0xb84,20)
     assert(u(dive,0)==id,'Dive controller identity mismatch')
     local flags=read(ctl+0xf80,24)
-    s.dive=bit.band(u(flags,12),4)~=0
-    s.swim=bit.band(u(flags,8),0x10000000)~=0
-    s.ragdoll=bit.band(u(flags,12),2)~=0
+    s.dive=bit.band(u(flags,12),0x20)~=0
+    s.swim=bit.band(u(flags,8),0x80000000)~=0
+    s.ragdoll=bit.band(u(flags,12),0x10)~=0
     s.elapsed=f(dive,8);s.landing=f(dive,12)
     stage='water'
-    local dm=global(0x276c798,true)
+    local dm=global(0x3326a80,true)
     local di=lookup(read(dm+32,20,true),id,32768,true)
     local capacity=u(read(dm+8,4),0)
     if not di or di==0xffffffff or capacity==0 then return nil,'waiting_for_water_record' end
@@ -114,7 +115,7 @@ function M.snapshot(api,game)
     s.elapsed_bytes=water:sub(17,20)
     s.deep=water:byte(2)~=0
     stage='stance'
-    local sm=global(0x276c2c8,true)
+    local sm=global(0x3326598,true)
     local si=lookup(read(sm+24,20,true),id,8192,true)
     if not si or si==0xffffffff then return nil,'waiting_for_stance_record' end
     assert(si<4096,'Unsupported stance index')
@@ -124,7 +125,7 @@ function M.snapshot(api,game)
     if s.stance==3 then return nil,'waiting_for_stance' end
     assert(s.stance<=2,'Unsupported stance')
     stage='movement'
-    local mm=global(0x276c280)
+    local mm=global(0x3326558)
     local mi=lookup(read(mm+0x48a0,20),id,16384)
     if not mi or mi==0xffffffff then return nil,'waiting_for_movement_record' end
     assert(mi<8192,'Unsupported movement index')
@@ -132,20 +133,20 @@ function M.snapshot(api,game)
     if pos:byte(33)==0 then return nil,'waiting_for_movement_reference' end
     s.root_z=f(pos,8)
     stage='water_settings'
-    local components=pointer(read(owner+0xf119e0,8))
-    local map=read(components,120*16)
+    local components=pointer(read(owner+0xf12e20,8))
+    local map=read(components,122*16)
     local index
-    for slot=0,119 do
+    for slot=0,121 do
         if map:sub(slot*16+1,slot*16+8)==RESOURCE then index=u(map,slot*16+8);break end
     end
     if index==nil then return nil,'waiting_for_water_settings' end
     assert(index==5,'Unsupported Drownable resource')
-    local resource=read(components+120*16+64*index,64)
+    local resource=read(components+122*16+64*index,64)
     assert(u(resource,0)==0x4a182741 and resource:sub(5,8)==packed(-1.3),'Drownable settings changed')
     s.base=f(resource,4)
     s.prone=rounded(s.base+rounded(0.9))
-    assert(read(game+0x211c950,4)==packed(2),'Native dive timeout changed')
-    assert(read(game+0x211c50c,4)==packed(0.9) and read(game+0x211c240,4)==packed(0.4),'Stance offsets changed')
+    assert(read(game+0x23c7100,4)==packed(2),'Native dive timeout changed')
+    assert(read(game+0x23c6cbc,4)==packed(0.9) and read(game+0x23c69e8,4)==packed(0.4),'Stance offsets changed')
     for _,n in ipairs({s.elapsed,s.landing,s.offset,s.drown_elapsed,s.remaining,s.surface,s.root_z}) do
         assert(finite(n),'Invalid movement or water value')
     end
@@ -163,6 +164,12 @@ function M.reason(s)
     if s.elapsed<0 or s.elapsed>=2 then return 'native_timeout' end
     -- A disabled secondary gate makes surface_z a reset value, not a plane.
     if s.deep or s.water_gate and s.surface>s.root_z-s.base then return 'deep_water' end
+    -- A reset surface value is not evidence of water. Restrict the assistance
+    -- to lower-shin depth; deeper water keeps the game's normal dive decision.
+    if not s.water_gate then return 'water_surface_unavailable' end
+    local depth=s.surface-s.root_z
+    if depth<=0 then return 'not_in_shallow_water' end
+    if depth>MAX_WATER_DEPTH+0.00001 then return 'water_too_deep' end
     return nil
 end
 

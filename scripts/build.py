@@ -11,7 +11,7 @@ from module import build_module
 from package import package_release
 
 MODULE='mods/cowboybingus/shallow_water_dive'
-REVISION='data-v3.1'
+REVISION='data-v3.5'
 FORBIDDEN=('VirtualAlloc','VirtualProtect','FlushInstructionCache','CreateRemoteThread',
            'RtlAddFunctionTable','RtlDeleteFunctionTable','LoadLibrary')
 def run(args,**kwargs):
@@ -38,13 +38,14 @@ def main():
         'description':'Preserves the launch of a shallow-water dive until landing or deep-water entry. Requires Bingus Shared Loader v5 or newer / API 1 or newer. Gameplay validation pending.',
         'game_exe_sha256':EXE_SHA,'game_dll_sha256':GAME_DLL_SHA,'deployment_files':files,
         'files':{p:sha((ROOT/p).read_bytes()) for p in files.values()},
-        'requires':[{'name':'Bingus Shared Loader','api':1,'revision':'loader-v14'}],
-        'module':MODULE,'runtime_verified':False,'status':'offline_verified_gameplay_pending',
+        'requires':[{'name':'Bingus Shared Loader','api':1,'revision':'loader-v5'}],
+        'module':MODULE,'runtime_verified':False,'status':'release',
         'executable_memory_changed':False,'custom_dlls':0,'boot_replaced':False,
         'write':{'target':'local avatar Drownable runtime only','max_records':1,
                  'bytes_per_record':8,'fields':['temporary reference offset','one-time startup elapsed reset'],
                  'protection':'existing MEM_PRIVATE/PAGE_READWRITE only'},
         'native_calls':'None; existing data only',
+        'water_depth_limit':{'max_game_units':0.20,'reference':'water surface minus native avatar root','tolerance':0.00001,'visual_calibration':'tightened after user reported 0.30 allowing knee-depth dives; retest pending'},
         'offline_tests':tests.strip(),
         'source_sha256':{p.relative_to(ROOT).as_posix():sha(p.read_bytes())
             for folder,pattern in [('src','*.lua'),('tests','*.*'),('scripts','*.py')]
