@@ -11,7 +11,7 @@ from module import build_module
 from package import package_release
 
 MODULE='mods/cowboybingus/shallow_water_dive'
-REVISION='data-v3.5'
+REVISION='data-v3.6'
 FORBIDDEN=('VirtualAlloc','VirtualProtect','FlushInstructionCache','CreateRemoteThread',
            'RtlAddFunctionTable','RtlDeleteFunctionTable','LoadLibrary')
 def run(args,**kwargs):
@@ -28,7 +28,8 @@ def main():
             raise ValueError('Unsupported executable modification API in '+path.name)
     resources=build_module(ROOT,build,MODULE,'dive_data.lua',REVISION)
     env=dict(os.environ,LUA_PATH=str(LUA.parent/'?.lua')+';;')
-    tests=run([LUA,ROOT/'tests/test_dive.lua',ROOT/'src'],env=env)
+    tests=''
+    tests+=run([LUA,ROOT/'tests/test_dive.lua',ROOT/'src'],env=env)
     tests+=run([LUA,ROOT/'tests/test_loader.lua',ROOT/'src'],env=env)
     (build/ARCHIVE).write_bytes(make_archive(resources))
     for suffix in ('.stream','.gpu_resources'): (build/(ARCHIVE+suffix)).write_bytes(b'')

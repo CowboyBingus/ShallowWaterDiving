@@ -1,3 +1,9 @@
+# v3.6
+
+- Update the two relocated shallow-water constants for Steam build 25480438.
+- Preserve the lower-shin water limit and normal deeper-water behavior.
+- Offline builds and package checks pass; live gameplay validation remains pending.
+
 # v3.5
 
 - Update compatibility for game build 25327279.

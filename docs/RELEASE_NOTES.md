@@ -1,3 +1,3 @@
-- Update compatibility for game build 25327279.
-- Restore dive assistance in shallow water.
-- Limit assistance to lower-shin water; deeper water keeps normal game behavior.
+- Update the two relocated shallow-water constants for Steam build 25480438.
+- Preserve the lower-shin water limit and normal deeper-water behavior.
+- Offline builds and package checks pass; live gameplay validation remains pending.
