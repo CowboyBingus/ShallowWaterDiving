@@ -32,6 +32,6 @@ Build with `python -B scripts/build.py`. The output is `releases/Shallow-Water-D
 
 [Release notes](docs/RELEASE_NOTES.md) · [Privacy review](docs/PRIVACY.md) · [Artwork](assets/ARTWORK.md)
 
-Developed with assistance from GPT-6 Astra.
+Developed with assistance from GPT-6 Astra and Claude Opus 5.5.
 
 Current version: **v3.8**, for game build **25480438**. See [changes](CHANGELOG.md) and [validation coverage](docs/MIGRATION_VALIDATION.md).
