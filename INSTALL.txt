@@ -1,14 +1,18 @@
 Release for Steam build 25480438 / EXE 1.8.46015.0. Offline checks passed; checked in live play.
 
+Depth slider v3.8: with Mod Options Menu installed, MODS > SHALLOW WATER DIVING > Max Dive Water Depth sets the deepest water a dive can start in, from 0.20 (lower shin; the default and the previous fixed limit) up to 1.30, where the Helldiver starts swimming. Press Apply (Tab) to use a new value. Without Mod Options Menu the limit stays 0.20. The water record's memory page is now checked once per record table instead of before every write, and the per-frame checks allocate no memory and read less.
+
+Mod Options Menu (optional, separate): https://github.com/CowboyBingus/ModOptionsMenu/releases/latest
+
 Water-depth adjustment v3.6: lowers the assistance cutoff from 0.30 to 0.20 game units above the native root, following the reported knee-depth behavior. Dry or deeper water is excluded; crossing the cutoff restores the original settings. Visual lower-shin confirmation remains pending.
 
 Mission compatibility repair for Steam 25480438: reads the relocated dive-timeout constant. Dives and the shallow-water correction were confirmed live.
 
-Requires Bingus Shared Loader v16 for the shared log folder.
+Requires Bingus Shared Loader v18 (shared log folder and LuaJIT code cache).
 
 Logs: %LOCALAPPDATA%/CowboyBingus/Helldivers2/Logs
 
-Shallow Water Diving - v3.7
+Shallow Water Diving - v3.8
 
 Requires Bingus Shared Loader loader-v14 or newer / API 1 or newer.
 
@@ -16,13 +20,13 @@ Supported Steam build 25480438 / EXE 1.8.46015.0.
 
 Upgrading from data-v1 or data-v2: replace the Shallow Water Diving package.
 
-An existing loader-v5 or newer is sufficient. data-v3.7 accepts newer loader
+An existing loader-v5 or newer is sufficient. data-v3.8 accepts newer loader
 
 APIs and retains startup recovery from data-v2.
 
-Close Helldivers 2. Import Shallow-Water-Diving-v3.7.zip and the updated
+Close Helldivers 2. Import Shallow-Water-Diving-v3.8.zip and the updated
 
-Bingus-Shared-Loader-v17.zip into Arsenal or HD2MM. Replace the previous loader
+Bingus-Shared-Loader-v18.zip into Arsenal or HD2MM. Replace the previous loader
 
 entry rather than enabling two copies. Enable both packages, then Purge and
 
@@ -37,6 +41,8 @@ This is an offline-tested candidate, not a gameplay-verified release.
 The first-dive-frame callback timing must still be checked in-game.
 
 The log is %LOCALAPPDATA%/CowboyBingus/Helldivers2/Logs/ShallowWaterDiving.log.
+
+It is written when the game starts and shuts down and whenever the mod stops.
 
 Uninstall with the game closed: disable Shallow Water Diving, then Purge and
 

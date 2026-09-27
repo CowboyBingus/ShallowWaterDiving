@@ -23,6 +23,7 @@
   "src/archive_loader.lua",
   "src/dive_data.lua",
   "src/windows_api.lua",
+  "tests/frame_budget.lua",
   "tests/test_dive.lua",
   "tests/test_loader.lua",
   "tests/test_package.py"
