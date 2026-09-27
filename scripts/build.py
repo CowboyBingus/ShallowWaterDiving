@@ -12,6 +12,7 @@ from package import package_release
 
 MODULE='mods/cowboybingus/shallow_water_dive'
 REVISION='data-v3.8'
+VERSION='v3.8.1'  # package version; the module revision is unchanged
 FORBIDDEN=('VirtualAlloc','VirtualProtect','FlushInstructionCache','CreateRemoteThread',
            'RtlAddFunctionTable','RtlDeleteFunctionTable','LoadLibrary')
 def run(args,**kwargs):
@@ -34,7 +35,7 @@ def main():
     (build/ARCHIVE).write_bytes(make_archive(resources))
     for suffix in ('.stream','.gpu_resources'): (build/(ARCHIVE+suffix)).write_bytes(b'')
     files={f'data/{ARCHIVE}{suffix}':f'build/{ARCHIVE}{suffix}' for suffix in ('','.stream','.gpu_resources')}
-    report={'name':'Shallow Water Diving','slug':'ShallowWaterDiving','revision':REVISION,
+    report={'name':'Shallow Water Diving','slug':'ShallowWaterDiving','revision':REVISION,'version':VERSION,
         'guid':'d93cfc97-0e42-47d6-936a-30e96a7fa539',
         'description':'Preserves the launch of a shallow-water dive until landing or deep-water entry; the depth limit is adjustable in Mod Options Menu. Requires Bingus Shared Loader v18.',
         'game_exe_sha256':EXE_SHA,'game_dll_sha256':GAME_DLL_SHA,'deployment_files':files,
@@ -56,5 +57,5 @@ def main():
     report['release']={'path':Path(os.path.relpath(release,ROOT)).as_posix(),'sha256':sha(release.read_bytes())}
     (build/'build-report.json').write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8')
     (build/'offline-tests.txt').write_text(tests,encoding='utf-8')
-    print(tests.strip());print('Built '+str(release)+'; in-game validation pending.')
+    print(tests.strip());print('Built '+str(release)+'.')
 if __name__=='__main__': main()

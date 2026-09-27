@@ -1,3 +1,9 @@
+# v3.8.1
+
+- Documentation-only release: the mod is identical to v3.8 (same compiled resource).
+- Rewrites the install notes packaged with the mod and the README: one current status line instead of notes left from earlier candidate builds, which said the mod was not yet verified in game. Dives, the shallow-water correction and the depth slider were confirmed in live play.
+- Lists one loader requirement, Bingus Shared Loader v18.
+
 # v3.8
 
 - Adds a Max Dive Water Depth slider under SHALLOW WATER DIVING in [Mod Options Menu](https://github.com/CowboyBingus/ModOptionsMenu) (optional). Dives can start in water from 0.20 (lower shin; the previous fixed limit and still the default) up to 1.30, where the Helldiver starts swimming; deeper water keeps the game's normal behavior. The value applies with the menu's Apply (Tab). Without Mod Options Menu the limit stays 0.20.
