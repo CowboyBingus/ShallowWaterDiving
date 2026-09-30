@@ -1,3 +1,9 @@
+# v3.9
+
+- Translatable: the depth slider's texts follow the game's Text Language when a translation is installed (see TRANSLATING.md).
+- With Mod Options Menu v1.1 they follow a language change the next time the escape menu opens.
+- Measured in live play: 0.007 ms per frame on the ship and 0.013 ms in missions, unchanged from v3.8.
+
 # v3.8.1
 
 - Documentation-only release: the mod is identical to v3.8 (same compiled resource).

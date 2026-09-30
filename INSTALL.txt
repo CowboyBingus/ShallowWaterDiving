@@ -1,7 +1,8 @@
-Shallow Water Diving - v3.8.1
+Shallow Water Diving - v3.9
 Release for Steam build 25480438 / EXE 1.8.46015.0. Offline checks passed;
 dives, the shallow-water correction and the depth slider were confirmed in live
-play. v3.8.1 changes only this documentation; the mod is identical to v3.8.
+play. v3.9 makes the slider's texts translatable (TRANSLATING.md); that change
+is checked offline only.
 
 Keeps a shallow-water dive airborne: during the dive your Helldiver uses the
 standing water reference, so shallow water no longer cancels the leap. Landing
@@ -17,7 +18,7 @@ https://github.com/CowboyBingus/ModOptionsMenu/releases/latest
 
 Install
 1. Close Helldivers 2.
-2. Import Shallow-Water-Diving-v3.8.1.zip and Bingus-Shared-Loader-v18.zip into
+2. Import Shallow-Water-Diving-v3.9.zip and Bingus-Shared-Loader-v18.zip into
    Arsenal or HD2MM. Replace any previous Shallow Water Diving or loader entry
    rather than enabling two copies.
 3. Enable both packages. With Arsenal's default priority, place Bingus Shared
