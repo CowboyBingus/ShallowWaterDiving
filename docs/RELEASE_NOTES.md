@@ -1,3 +1,6 @@
-- Translatable: the depth slider's texts follow the game's Text Language when a translation is installed (see TRANSLATING.md).
-- With Mod Options Menu v1.1 they follow a language change the next time the escape menu opens.
-- Measured in live play: 0.007 ms per frame on the ship and 0.013 ms in missions, unchanged from v3.8.
+- An error in the game's update or another mod now pauses Shallow Water Diving instead of stopping it; it restores its changes and resumes once updates run cleanly again.
+- An error inside the mod no longer stops it at once; eight within a minute still do.
+- The depth slider no longer goes missing when Mod Options Menu is not ready yet; the mod registers it again when the menu appears.
+- With Bingus Shared Loader v19 the slider registers once at startup, whatever the mod-manager order.
+- Requires Bingus Shared Loader v18 or newer (v19 is current).
+- Measured in live play: 0.013 ms per frame in missions and 0.007 on the ship.

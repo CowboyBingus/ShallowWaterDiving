@@ -22,7 +22,7 @@ From this repository's root:
 python -B scripts/build.py
 ```
 
-The builder checks the supported installation's EXE and game.dll hashes, compiles the module, runs the Lua regression tests and verifies the installable ZIP. Output is `releases/Shallow-Water-Diving-v3.8.1.zip`; intermediate files and reports stay in ignored `build/`. Building does not install or launch the game.
+The builder checks the supported installation's EXE and game.dll hashes, compiles the module, runs the Lua regression tests and verifies the installable ZIP. Output is `releases/Shallow-Water-Diving-<version>.zip` (the `VERSION` in `scripts/build.py`); intermediate files and reports stay in ignored `build/`. Building does not install or launch the game.
 
 Set `HD2_GAME_ROOT` for a nonstandard game installation, or `HD2_LUAJIT` to an existing compatible compiler executable. No parent repository, extracted boot/Wwise resource, research capture or private build tool is required.
 
@@ -33,6 +33,6 @@ tools/src/LuaJIT/src/luajit.exe tests/test_dive.lua src
 tools/src/LuaJIT/src/luajit.exe tests/test_loader.lua src
 ```
 
-Before publishing, run `python -B scripts/privacy_audit.py --zip releases/Shallow-Water-Diving-v3.8.1.zip`. Only the scanner's explicit source inventory belongs in Git. Keep game files, memory captures, logs, profiles, dependency checkouts and build output outside source control. The privacy report uses relative paths and file hashes; it does not print matching sensitive text.
+Before publishing, run `python -B scripts/privacy_audit.py --zip releases/Shallow-Water-Diving-<version>.zip`. Only the scanner's explicit source inventory belongs in Git. Keep game files, memory captures, logs, profiles, dependency checkouts and build output outside source control. The privacy report uses relative paths and file hashes; it does not print matching sensitive text.
 
 The `mods/cowboybingus/shallow_water_dive` resource, runtime singleton and mod-manager GUID are compatibility identifiers. Preserve them when changing the display name. The shared loader is maintained separately.

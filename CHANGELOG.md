@@ -1,3 +1,15 @@
+# v3.10
+
+- Errors raised by the game's update or by another mod now pass through unchanged, so their stack trace starts where they were raised.
+- After such an error the mod restores its changes and pauses instead of stopping for the session, and resumes after 60 updates without one. Eight such errors within a minute still stop it.
+- An error inside the mod no longer stops it at once: eight within a minute do, and a minute without one resets the count. A refused or failed write still stops it at once.
+- The shutdown status keeps the first failure (`stopped after: <reason>`) instead of overwriting it with `stopped`.
+- The depth slider no longer goes missing for the session when Mod Options Menu is not ready on the first update or refuses it. Registration is retried when the menu appears, is replaced or reports a new revision, up to 8 times per session.
+- With Bingus Shared Loader v19 the depth slider registers once, after every mod has started and before the first update, whatever the mod-manager order. Nothing looks for Mod Options Menu during play; with loader v18 the retry above stays.
+- The loader is recognized by its features (API 1 and the shared log folder) instead of its version number. Requires Bingus Shared Loader v18 or newer.
+- Now licensed under the Zero-Clause BSD license (0BSD).
+- Measured in live play: 0.013 ms per frame in missions and 0.007 ms on the ship.
+
 # v3.9
 
 - Translatable: the depth slider's texts follow the game's Text Language when a translation is installed (see TRANSLATING.md).
