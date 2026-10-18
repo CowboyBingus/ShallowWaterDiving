@@ -1,6 +1,1 @@
-- An error in the game's update or another mod now pauses Shallow Water Diving instead of stopping it; it restores its changes and resumes once updates run cleanly again.
-- An error inside the mod no longer stops it at once; eight within a minute still do.
-- The depth slider no longer goes missing when Mod Options Menu is not ready yet; the mod registers it again when the menu appears.
-- With Bingus Shared Loader v19 the slider registers once at startup, whatever the mod-manager order.
-- Requires Bingus Shared Loader v18 or newer (v19 is current).
-- Measured in live play: 0.013 ms per frame in missions and 0.007 on the ship.
+- Waits for a dive with fewer memory reads, on the ship and in missions. Measured in game: 0.009-0.010 to 0.002 ms per frame on the ship and 0.012-0.015 to 0.009-0.010 in missions.

@@ -1,3 +1,7 @@
+# v3.10.1
+
+- Waits for a dive with fewer memory reads, on the ship and in missions. Measured in game: 0.009-0.010 to 0.002 ms per frame on the ship and 0.012-0.015 to 0.009-0.010 in missions.
+
 # v3.10
 
 - Errors raised by the game's update or by another mod now pass through unchanged, so their stack trace starts where they were raised.
