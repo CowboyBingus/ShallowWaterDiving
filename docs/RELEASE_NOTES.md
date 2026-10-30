@@ -1,1 +1,0 @@
-- Waits for a dive with fewer memory reads, on the ship and in missions. Measured in game: 0.009-0.010 to 0.002 ms per frame on the ship and 0.012-0.015 to 0.009-0.010 in missions.
